@@ -1,0 +1,40 @@
+{
+  "name": "classify128",
+  "version": "0.1.0",
+  "description": "Write JavaScript classes easily",
+  "main": "classify.js",
+  "scripts": {
+    "build": "test -d build || mkdir build; browserify classify.js -o build/classify.js --standalone Classify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanwimmer128/classify128.git"
+  },
+  "keywords": [
+    "classify",
+    "class"
+  ],
+  "author": "Stefan Wimmer <stefanwimmer128@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stefanwimmer128/classify128/issues"
+  },
+  "homepage": "https://github.com/stefanwimmer128/classify128#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  }
+}
