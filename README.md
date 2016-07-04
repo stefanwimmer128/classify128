@@ -13,44 +13,51 @@ npm i -S classify
 ``` javascript
 const Classify = require("classify");
 
-const AbstractName = Classify({
+const Logger = Classify({
     prototype: {
-        getName: function ()
+        log: function ()
         {
-            throw new Error("Abstract method can not be instantiated!");
-        },
-        
-        logName: function ()
-        {
-            console.log(this.getName());
+            console.log.apply(console, arguments);
         }
     }
 });
 
-const MyName = Classify({
-    constructor: function (name)
+const HasName = Classify({
+    constructor: function (_super, name)
     {
+        _super();
+        
         this.name = name;
     },
     
-    extends: AbstractName.prototype,
+    extends: Logger,
     
     prototype: {
-        getName: function ()
+        logName: function ()
         {
-            return this.name;
-        }
-    },
-    
-    static: {
-        instance: function (name)
-        {
-            return new MyName(name);
+            this.log(this.name);
         }
     }
 });
 
-MyName.instance("Stefan Wimmer").logName(); // Stefan Wimmer
+const Me = Classify({
+    constructor: function (_super)
+    {
+        _super("Stefan Wimmer");
+    },
+    
+    extends: HasName,
+    
+    prototype: {
+        logTwice: function ()
+        {
+            this.logName();
+            this.logName();
+        }
+    }
+});
+
+new Me("Stefan Wimmer").logTwice(); // Stefan Wimmer
 ```
 
 ### Use in browser
@@ -61,42 +68,49 @@ MyName.instance("Stefan Wimmer").logName(); // Stefan Wimmer
 ```
 
 ``` javascript
-var AbstractName = Classify({
+var Logger = Classify({
     prototype: {
-        getName: function ()
+        log: function ()
         {
-            throw new Error("Abstract method can not be instantiated!");
-        },
-        
-        logName: function ()
-        {
-            console.log(this.getName());
+            console.log.apply(console, arguments);
         }
     }
 });
 
-var MyName = Classify({
-    constructor: function (name)
+var HasName = Classify({
+    constructor: function (_super, name)
     {
+        _super();
+        
         this.name = name;
     },
     
-    extends: AbstractName.prototype,
+    extends: Logger,
     
     prototype: {
-        getName: function ()
+        logName: function ()
         {
-            return this.name;
-        }
-    },
-    
-    static: {
-        instance: function (name)
-        {
-            return new MyName(name);
+            this.log(this.name);
         }
     }
 });
 
-MyName.instance("Stefan Wimmer").logName(); // Stefan Wimmer
+var Me = Classify({
+    constructor: function (_super)
+    {
+        _super("Stefan Wimmer");
+    },
+    
+    extends: HasName,
+    
+    prototype: {
+        logTwice: function ()
+        {
+            this.logName();
+            this.logName();
+        }
+    }
+});
+
+new Me("Stefan Wimmer").logTwice(); // Stefan Wimmer
 ```
