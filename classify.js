@@ -6,13 +6,22 @@ const Classify = function (pClass = {})
 {
     const _class = function ()
     {
-        if (this.constructor !== _class)
-            throw new Error("Class must be instantiated!");
+        const _this = this;
         
-        (pClass.constructor || function () {}).apply(this, arguments);
+        const args = [
+            function ()
+            {
+                (pClass.extends || Object).apply(_this, arguments);
+                Object.assign(_this, _class.prototype);
+            }
+        ];
+        
+        Array.prototype.forEach.call(arguments, a => args.push(a));
+        
+        (pClass.constructor || function (_super) { _super(); }).apply(this, args);
     };
     
-    _class.prototype = Object.create(pClass.extends || {});
+    _class.prototype = Object.create((pClass.extends || { prototype: {} }).prototype);
     _class.prototype.constructor = _class;
     
     Object.assign(_class.prototype, pClass.prototype || {});
