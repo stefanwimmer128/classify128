@@ -1,6 +1,6 @@
 {
   "name": "classify128",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Write JavaScript classes easily",
   "main": "classify128.js",
   "scripts": {
