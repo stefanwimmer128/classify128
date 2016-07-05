@@ -7,7 +7,7 @@ Write JavaScript classes easily
 ### Use with Node.js / RequireJS
 
 ``` bash
-npm i -S classify
+npm i -S classify128
 ```
 
 ``` javascript
