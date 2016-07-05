@@ -40,7 +40,7 @@ const HasName = Classify({
     }
 });
 
-var Me = Classify({
+const Me = Classify({
     constructor: function (_super)
     {
         _super("Stefan Wimmer");
