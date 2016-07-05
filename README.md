@@ -11,7 +11,7 @@ npm i -S classify
 ```
 
 ``` javascript
-const Classify = require("classify");
+const Classify = require("classify128");
 
 const Logger = Classify({
     prototype: {
@@ -40,7 +40,7 @@ const HasName = Classify({
     }
 });
 
-const Me = Classify({
+var Me = Classify({
     constructor: function (_super)
     {
         _super("Stefan Wimmer");
@@ -54,17 +54,23 @@ const Me = Classify({
             this.logName();
             this.logName();
         }
+    },
+    
+    static: {
+        instance: function ()
+        {
+            return new Me();
+        }
     }
 });
 
-new Me("Stefan Wimmer").logTwice(); // Stefan Wimmer
+Me.instance().logTwice();
 ```
 
 ### Use in browser
 
 ``` html
-<script src="classify.js"></script>
-<script src="myclasses.js"></script>
+<script src="classify128.js"></script>
 ```
 
 ``` javascript
@@ -109,8 +115,15 @@ var Me = Classify({
             this.logName();
             this.logName();
         }
+    },
+    
+    static: {
+        instance: function ()
+        {
+            return new Me();
+        }
     }
 });
 
-new Me("Stefan Wimmer").logTwice(); // Stefan Wimmer
+Me.instance().logTwice();
 ```

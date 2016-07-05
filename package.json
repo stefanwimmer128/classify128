@@ -1,10 +1,10 @@
 {
   "name": "classify128",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Write JavaScript classes easily",
-  "main": "classify.js",
+  "main": "classify128.js",
   "scripts": {
-    "build": "test -d build || mkdir build; browserify classify.js -o build/classify.js --standalone Classify"
+    "build": "test -d build || mkdir build; browserify classify128.js -o build/classify128.js --standalone Classify"
   },
   "repository": {
     "type": "git",
